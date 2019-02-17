@@ -1,4 +1,4 @@
-class CreateSalePrices < ActiveRecord::Migration[4.2]
+class CreateSalePrices < SpreeExtension::Migration[5.1]
   def change
     create_table :spree_sale_prices do |t|
       t.integer :price_id
