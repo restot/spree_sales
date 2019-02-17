@@ -11,15 +11,16 @@ module SpreeSales
       g.test_framework :rspec
     end
 
-    initializer "spree.register.sale_configuration.environment", before: :load_config_initializers  do |app|
+    initializer "spree.sale.environment", before: :load_config_initializers  do |app|
       Spree::SalesConfiguration::Config = Spree::SalesConfiguration.new
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::AmountSalePriceCalculator
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::PercentOffSalePriceCalculator
     end
 
     def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), "../../app/**/*_decorator*.rb")) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
+      cache_klasses = %W(#{config.root}/app/**/*_decorator*.rb #{config.root}/app/overrides/*.rb)
+      Dir.glob(cache_klasses) do |klass|
+        Rails.configuration.cache_classes ? require(klass) : load(klass)
       end
     end
 
