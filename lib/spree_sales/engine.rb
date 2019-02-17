@@ -11,7 +11,7 @@ module SpreeSales
       g.test_framework :rspec
     end
 
-    initializer "spree.sale.environment", before: :load_config_initializers  do |app|
+    initializer "spree.sales_configuration.environment", before: :load_config_initializers  do |app|
       Spree::SalesConfiguration::Config = Spree::SalesConfiguration.new
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::AmountSalePriceCalculator
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::PercentOffSalePriceCalculator
