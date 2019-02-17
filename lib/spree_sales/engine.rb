@@ -11,7 +11,7 @@ module SpreeSales
       g.test_framework :rspec
     end
 
-    initializer "spree.sales_configuration.environment", before: :load_config_initializers  do 
+    initializer "spree.sales_configuration.environment", before: :load_config_initializers do 
       Spree::SalesConfiguration::Config = Spree::SalesConfiguration.new
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::AmountSalePriceCalculator
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::PercentOffSalePriceCalculator
@@ -23,6 +23,8 @@ module SpreeSales
         Rails.configuration.cache_classes ? require(klass) : load(klass)
       end
     end
+    
+    puts "CONFIG LOAD DEBUG"
 
     config.to_prepare &method(:activate).to_proc
   end
