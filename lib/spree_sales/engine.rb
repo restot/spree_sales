@@ -15,6 +15,7 @@ module SpreeSales
       Spree::SalesConfiguration::Config = Spree::SalesConfiguration.new
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::AmountSalePriceCalculator
       Spree::SalesConfiguration::Config.calculators << Spree::Calculator::PercentOffSalePriceCalculator
+      puts "CONFIG LOAD DEBUG"
     end
 
     def self.activate
@@ -24,7 +25,7 @@ module SpreeSales
       end
     end
     
-    puts "CONFIG LOAD DEBUG"
+    
 
     config.to_prepare &method(:activate).to_proc
   end
