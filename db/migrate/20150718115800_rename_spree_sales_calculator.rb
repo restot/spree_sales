@@ -1,4 +1,4 @@
-class RenameSpreeSalesCalculator < ActiveRecord::Migration[4.2]
+class RenameSpreeSalesCalculator < SpreeExtension::Migration[5.1]
   def up
     execute "UPDATE spree_calculators SET type = 'Spree::Calculator::AmountSalePriceCalculator' WHERE type = 'Spree::Calculator::DollarAmountSalePriceCalculator'"
   end
